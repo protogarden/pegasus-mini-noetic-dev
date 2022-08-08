@@ -1,0 +1,18 @@
+<launch>
+
+    
+
+
+
+
+
+  <include file="$(find apriltag_ros)/launch/continuous_detection.launch"/> 
+    <!-- Remap topic required by the node to custom topics -->
+
+  <arg name="pi_cam_config_file" default="$(find pegasus_base)/config/pi_cam_config.yaml"/>
+  <node pkg="pegasus_base" type="pi_camfeed.py" name="camera_pub" output="screen">
+    <rosparam file="$(arg pi_cam_config_file)" command="load"/>
+  </node>
+
+  
+</launch>

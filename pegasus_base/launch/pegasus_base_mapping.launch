@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="robot_description" textfile="$(find pegasus_base)/urdf/pegasus_mini.urdf" />
+    <!--<node name="joint_state_publisher"  pkg="joint_state_publisher" type="joint_state_publisher" />-->
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+   
+
+    <node respawn="true" pkg="joy" type="joy_node" name="joystick" >
+        <param name="autorepeat_rate" value="1" />
+        <param name="dev" type="string" value="/dev/input/js0" />
+        <param name="deadzone" value="0.12" />
+    </node>    
+
+   <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/ttyUSB1"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
+    <param name="scan_mode"         type="string" value="Boost"/>
+    <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+    </node>
+    <!--<include file="$(find pegasus_base)/launch/razor-pub.launch"/> -->
+    <node pkg="pegasus_base" type="pegasus_base.py" name="pegasus_base_node" output="screen"></node>  
+      
+    <arg name="roboclaw_config_file" default="$(find pegasus_base)/config/roboclaw_config.yaml"/>
+    <node pkg="pegasus_base" type="rc_node.py" name="roboclaw_node" output="screen">
+        <rosparam file="$(arg roboclaw_config_file)" command="load"/>
+    </node>    
+
+    <node pkg="rosboard" type="rosboard_node" name="rosboard_node"></node>
+
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twistjoy">
+        <param name="scale_linear" value="0.4" />
+        <param name="scale_angular" value="1" />
+    </node>
+
+		<!-- Start Google Cartographer node with custom configuration file-->
+    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+          -configuration_directory
+              $(find pegasus_base)/configuration_files
+          -configuration_basename pegasus_lidar_2d.lua" 
+          output="screen">
+    </node>
+
+		<!-- Additional node which converts Cartographer map into ROS occupancy grid map. Not used and can be skipped in this case -->
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+
+</launch>

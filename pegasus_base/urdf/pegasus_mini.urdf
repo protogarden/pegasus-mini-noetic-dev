@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="pegasus_mini">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.05 0.00100384888904426 0.0291653156426118"
+        rpy="0 0 0" />
+      <mass
+        value="3.10942485851605" />
+      <inertia
+        ixx="0.009967506563368"
+        ixy="-1.75362440797118E-07"
+        ixz="3.30883914944428E-06"
+        iyy="0.0193424468245618"
+        iyz="-4.83041311800311E-07"
+        izz="0.0266448037820947" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pegasus_base/meshes/base_link.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.08 0 0.03125"
+        rpy="1.5707 0 0" />
+      <geometry>
+              <box size="0.45 0.12 0.34"/>
+
+      </geometry>
+    </collision>
+    </link>
+
+  <link
+      name="frontcastor">
+      <inertial>
+        <origin
+          xyz="-5.72225387474662E-15 5.64825963778048E-15 -1.06852380645045E-16"
+          rpy="0 0 0" />
+        <mass
+          value="0.232013920708616" />
+        <inertia
+          ixx="0.000277320036972709"
+          ixy="-1.20216774398711E-17"
+          ixz="-1.01007354824876E-32"
+          iyy="0.000538249657591165"
+          iyz="1.19367335965887E-19"
+          izz="0.000277320036972708" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0.15 0 0"
+          rpy="1.5707 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001"/>
+        </geometry>
+        <surface>
+          <friction>
+            <ode> 123
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <material
+          name="">
+          <color
+            rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="1.5707 0 0" />
+        <geometry>
+          <cylinder length="0.02" radius="0.0375"/>
+
+        </geometry>
+              <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      </link>
+     
+  <joint
+    name="frontcastor_joint"
+    type="continuous">
+    <origin
+      xyz="0.194 0 -0.025"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="frontcastor" />
+    <axis
+      xyz="0 1 0" />
+    </joint>
+
+  <link
+      name="camera">
+      <inertial>
+        <origin
+          xyz="-5.72225387474662E-15 5.64825963778048E-15 -1.06852380645045E-16"
+          rpy="0 0 0" />
+        <mass
+          value="0.232013920708616" />
+        <inertia
+          ixx="0.000277320036972709"
+          ixy="-1.20216774398711E-17"
+          ixz="-1.01007354824876E-32"
+          iyy="0.000538249657591165"
+          iyz="1.19367335965887E-19"
+          izz="0.000277320036972708" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0.15 0 0"
+          rpy="1.5707 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001"/>
+        </geometry>
+        <surface>
+          <friction>
+            <ode> 123
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <material
+          name="">
+          <color
+            rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="1.5707 0 0" />
+        <geometry>
+          <cylinder length="0.02" radius="0.0375"/>
+
+        </geometry>
+              <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      </link>
+     
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.33 0 0.098"
+      rpy="-1.57079 0 -1.57079" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera" />
+    <axis
+      xyz="0 1 0" />
+    </joint>
+
+
+  <link
+      name="imu_link">
+      <inertial>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <mass
+          value="0.0" />
+        <inertia
+          ixx="0.000"
+          ixy="0.000"
+          ixz="0.000"
+          iyy="0.000"
+          iyz="0.000"
+          izz="0.000" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001"/>
+        </geometry>
+        <surface>
+          <friction>
+            <ode> 123
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <material
+          name="">
+          <color
+            rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001"/>
+
+        </geometry>
+              <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      </link>
+     
+  <joint
+    name="imu_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 00"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="imu_link" />
+    <axis
+      xyz="0 1 0" />
+    </joint>
+
+
+
+  <link
+    name="leftwheel_link">
+    <inertial>
+      <origin
+        xyz="-5.72225387474662E-15 5.64825963778048E-15 -1.06852380645045E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.232013920708616" />
+      <inertia
+        ixx="0.000277320036972709"
+        ixy="-1.20216774398711E-17"
+        ixz="-1.01007354824876E-32"
+        iyy="0.000538249657591165"
+        iyz="1.19367335965887E-19"
+        izz="0.000277320036972708" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pegasus_base/meshes/leftwheel_link.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707 0 0" />
+      <geometry>
+        <cylinder length="0.02" radius="0.0625"/>
+
+      </geometry>
+    </collision>
+    </link>
+     
+  <joint
+    name="leftwheel_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.1279 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leftwheel_link" />
+    <axis
+      xyz="0 1 0" />
+    </joint>
+     
+  <link
+    name="rightwheel_link">
+    <inertial>
+      <origin
+        xyz="-2.29870205968863E-18 5.20417042793042E-15 1.60744195424908E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.232013920708616" />
+      <inertia
+        ixx="0.000277320036972709"
+        ixy="-3.80177089528946E-20"
+        ixz="5.2352935655391E-36"
+        iyy="0.000538249657591166"
+        iyz="4.45769783655849E-20"
+        izz="0.000277320036972709" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pegasus_base/meshes/rightwheel_link.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707 0 0" />
+      <geometry>
+            <cylinder length="0.02" radius="0.0625"/>
+      </geometry>
+    </collision>
+    </link>
+     
+  <joint
+    name="rightwheel_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.1279 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rightwheel_link" />
+    <axis
+      xyz="0 1 0" />
+    </joint>
+     
+  <link
+    name="laser">
+    <inertial>
+      <origin
+        xyz="0.166389887141163 0.121618364229734 0.0967069926939433"
+        rpy="0 0 0" />
+      <mass
+        value="0.00676512405731958" />
+      <inertia
+        ixx="3.01336664603449E-06"
+        ixy="-2.44109847691184E-08"
+        ixz="-2.10743854970194E-08"
+        iyy="3.11861951022779E-06"
+        iyz="-1.45111080099309E-08"
+        izz="5.59775679030702E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.00402"
+        rpy="-1.5707 0 -1.149" />
+      <geometry>
+        <mesh
+          filename="package://pegasus_base/meshes/lidar.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.43921568627451 0.43921568627451 0.43921568627451 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+         <cylinder length="0.025" radius="0.035"/>
+
+      </geometry>
+    </collision>
+    </link>
+     
+  <joint
+    name="laser_joint"
+    type="fixed">
+    <origin
+      xyz="0.24679 0 0.098"
+      rpy="0 0 3.14159" /> <!-- Rotate Laser Frame about 180 about z to match RPLidar defualt laser frame -->
+    <parent
+      link="base_link" />
+    <child
+      link="laser" />
+    <axis
+      xyz="0 0 0" />
+    </joint>
+
+
+  <gazebo reference="laser">
+<sensor type="gpu_ray" name="head_hokuyo_sensor">
+  <pose>0 0 0 0 0 0</pose>
+  <visualize>true</visualize>
+  <update_rate>20</update_rate>
+  <ray>
+    <scan>
+      <horizontal>
+        <samples>720</samples>
+        <resolution>1</resolution>
+        <min_angle>-3.1467</min_angle>
+        <max_angle>3.1467</max_angle>
+      </horizontal>
+    </scan>
+    <range>
+      <min>0.10</min>
+      <max>12.0</max>
+      <resolution>0.01</resolution>
+    </range>
+    <noise>
+      <type>gaussian</type>
+      <mean>0.0</mean>
+      <stddev>0.01</stddev>
+    </noise>
+  </ray>
+  <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+    <topicName>/scan</topicName>
+    <frameName>laser</frameName>
+  </plugin>
+</sensor>
+  </gazebo>
+  
+     
+  <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller_front">
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>True</publishWheelTF>
+      <publishTf>1</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftJoint>leftwheel_joint</leftJoint>
+      <rightJoint>rightwheel_joint</rightJoint>
+      <wheelSeparation>0.390</wheelSeparation>
+      <wheelDiameter>0.125</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>30</wheelTorque>
+      <wheelAcceleration>1.8</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo>
+</robot>

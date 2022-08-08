@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+    
+    <param name="robot_description" textfile="$(find pegasus_base)/urdf/pegasus_mini.urdf" />
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+    <!--<node name="joint_state_publisher"  pkg="joint_state_publisher" type="joint_state_publisher" />-->
+
+    <node respawn="true" pkg="joy" type="joy_node" name="joystick" >
+        <param name="autorepeat_rate" value="1" />
+        <param name="dev" type="string" value="/dev/input/js0" />
+        <param name="deadzone" value="0.12" />
+    </node>    
+
+    <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
+    <param name="scan_mode"         type="string" value="Boost"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
+    <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+    </node>
+
+
+    
+
+    <node pkg="pegasus_base" type="pegasus_base.py" name="pegasus_base_node" output="screen"></node>
+
+
+    <arg name="led_config_file" default="$(find pegasus_base)/config/led_config.yaml"/>
+    <node pkg="pegasus_base" type="led_node.py" name="led_node" output="screen">
+        <rosparam file="$(arg led_config_file)" command="load"/>
+    </node>
+
+    <arg name="roboclaw_config_file" default="$(find pegasus_base)/config/roboclaw_config.yaml"/>
+    <node pkg="pegasus_base" type="rc_node.py" name="roboclaw_node" output="screen">
+        <rosparam file="$(arg roboclaw_config_file)" command="load"/>
+    </node>    
+    
+    <node pkg="rosboard" type="rosboard_node" name="rosboard_node"></node>
+
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twistjoy">
+        <param name="scale_linear" value="0.4" />
+        <param name="scale_angular" value="1" />
+    </node>
+</launch>

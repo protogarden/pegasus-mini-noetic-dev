@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="urdf_filename" default="$(find pegasus_base)/urdf/pegasus_mini.urdf"/>
+
+    <node name="cartographer_assets_writer" pkg="cartographer_ros" required="true"
+      type="cartographer_assets_writer" args="
+
+          -configuration_directory
+              $(find pegasus_base)/configuration_files
+          -configuration_basename assets_writer_ros_map.lua
+
+          -configuration_directory $(find cartographer_ros)/configuration_files
+          -urdf_filename $(arg urdf_filename)
+          -pose_graph_filename $(arg pose_graph_filename)"
+      output="screen">
+  </node>
+
+</launch>

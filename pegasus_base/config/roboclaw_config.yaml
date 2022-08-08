@@ -1,0 +1,23 @@
+odom_frequency: 100
+roboclaw_port: /dev/ttyACM0
+
+ticks_per_meter: 8130.0
+base_width: 0.25868
+
+#Moror Velocity PID gains 
+velocity_p: 4000
+velocity_i: 500
+velocity_d: 0.0
+qpps: 9000
+
+#Max motor currents 
+motor1_max_current: 250 #mA
+motor2_max_current: 250 #mA
+
+#Motor Acceleration
+wheel_accel: 8000 #ticks/s/s
+
+motor_max_average_current: 200 #a/s
+current_average_time_frame: 2
+
+velocity_pub_freq: 10 #Frequecy wheel speed commands are send to motor controller 

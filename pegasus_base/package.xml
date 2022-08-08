@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>pegasus_base</name>
+  <version>0.0.1</version>
+  <description>pegasus base node</description>
+
+  <maintainer email="tvdbon@gmail.com">Tom</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+
+
+  <export>
+
+  </export>
+</package>

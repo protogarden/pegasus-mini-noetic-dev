@@ -1,0 +1,8 @@
+port: /dev/ttyUSB0
+topic: imu
+frame_id: base_link
+gx_offset:  0.011
+gy_offset:  -0.0088 
+gz_offset: 0.0042
+vth_thresh: 0.02 #Angular Velocity threshold at which IMU measurement is used
+imu_node_frequency: 100
